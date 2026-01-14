@@ -73,7 +73,11 @@ install( TARGETS  uxplay RUNTIME DESTINATION bin )
 install( FILES uxplay.1 DESTINATION ${CMAKE_INSTALL_MANDIR}/man1 )
 install( FILES README.md README.txt README.html LICENSE DESTINATION ${CMAKE_INSTALL_DOCDIR} ) 
 install( FILES lib/llhttp/LICENSE-MIT DESTINATION ${CMAKE_INSTALL_DOCDIR}/llhttp )
-install( FILES uxplay.service DESTINATION ${CMAKE_INSTALL_DOCDIR}/systemd ) 
+install( FILES uxplay.service DESTINATION ${CMAKE_INSTALL_DOCDIR}/systemd )
+
+if(WIN32)
+  install(CODE "include(${CMAKE_SOURCE_DIR}/cmake/BundleWindowsDLLs.cmake)")
+endif() 
 
 if (DBUS_FOUND)
 install( FILES Bluetooth_LE_beacon/dbus/uxplay-beacon.py
